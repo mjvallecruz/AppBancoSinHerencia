@@ -104,7 +104,8 @@ public class Cuenta {
         s += "Saldo actual: " + saldo + "€\n";
         s += "------------------------  M O V I M I E N T O S  ------------------------\n";
         s += obtenerMovimientos();
-        BordesMatrices.mostrarTextoConBordes(s);
+        //BordesMatrices.mostrarTextoConBordes(s);
+        System.out.println(s);
     }
 
     @Override
