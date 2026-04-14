@@ -100,17 +100,16 @@ public class Cuenta {
 
         String s = "";
         s += "Nºcuenta: " + numeroCuenta + "\n";
-        s += "Titular: " + titular.nombreCompleto() + ", domicilio en " + titular.direccionCompleta() + "\n";
+        s += "Titular: " + "\n\t\t Dni:" +titular.getDni() + "\n\t\t Nombre:"+ titular.nombreCompleto() + "\n\t\t Domicilio:" + titular.direccionCompleta() + "\n";
         s += "Saldo actual: " + saldo + "€\n";
         s += "------------------------  M O V I M I E N T O S  ------------------------\n";
         s += obtenerMovimientos();
-        //BordesMatrices.mostrarTextoConBordes(s);
         System.out.println(s);
     }
 
     @Override
     public String toString() {
-        return "Cuenta [numeroCuenta=" + numeroCuenta + ", titular=" + titular.nombreCompleto() + "]";
+        return "Cuenta [numeroCuenta=" + numeroCuenta + ", titular=" + titular.clienteCompleto() + "]";
     }
 
     //////////////////////////////////////////////////////

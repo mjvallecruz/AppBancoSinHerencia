@@ -7,6 +7,7 @@ public class AppSucursalBancaria {
     private static Scanner entrada = new Scanner(System.in);
     private static ArrayList<Cliente> clientes = new ArrayList<>();
     private static ArrayList<Cuenta> cuentas = new ArrayList<>();
+    //cuenta seleccionada para operar con ella
     private static Cuenta cuentaActiva = null;
     private static int contadorCuenta = 1;
 
@@ -38,6 +39,8 @@ public class AppSucursalBancaria {
 
     static void crearCliente() {
 
+        System.out.println("Dime el dni del cliente");
+        String dni = entrada.nextLine();
         System.out.println("Dime el nombre del cliente");
         String nombre = entrada.nextLine();
         System.out.println("Dime los apellidos del cliente");
@@ -49,7 +52,7 @@ public class AppSucursalBancaria {
         System.out.println("Dime la fecha de nacimiento del cliente AAAA-MM-DD");
         String fecha = entrada.nextLine();
 
-        clientes.add(new Cliente(nombre, apellidos, direccion, ciudad, LocalDate.parse(fecha)));
+        clientes.add(new Cliente(dni,nombre, apellidos, direccion, ciudad, LocalDate.parse(fecha)));
         System.out.println("El cliente de nombre "+nombre+" "+apellidos+" se ha creado correctamente");
     }
 
@@ -61,15 +64,15 @@ public class AppSucursalBancaria {
             return;
         }
 
-        String nombre;
+        String dni;
         Cliente cliente;
         do {
-            System.out.println("Dime el nombre del cliente que quiere abrir una cuenta");
+            System.out.println("Dime el dni del cliente que quiere abrir una cuenta");
             for (Cliente c : clientes) {
-                System.out.println(c.getNombre());
+                System.out.println(c.clienteCompleto());
             }
-            nombre = entrada.nextLine();
-            cliente = validarCliente(nombre);
+            dni = entrada.nextLine();
+            cliente = validarCliente(dni);
 
         } while (cliente == null);
 
@@ -77,9 +80,9 @@ public class AppSucursalBancaria {
         System.out.println("La cuenta a nombre de "+cliente.nombreCompleto()+" se ha creado correctamente");
     }
 
-    static Cliente validarCliente(String nombre) {
+    static Cliente validarCliente(String dni) {
         for (Cliente c : clientes) {
-            if (c.getNombre().equals(nombre)) {
+            if (c.getDni().equals(dni)) {
                 return c;
             }
         }

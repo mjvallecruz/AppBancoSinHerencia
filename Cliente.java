@@ -2,6 +2,7 @@ import java.time.LocalDate;
 
 public class Cliente {
 
+    private String dni;
     private String nombre;
     private String apellidos;
     private String direccion;
@@ -11,9 +12,12 @@ public class Cliente {
     //////////////////////////////////////////////////////
     // CONSTRUCTORES
     //////////////////////////////////////////////////////
-
-    public Cliente(String nombre, String apellidos, String direccion,
+    public Cliente(String dni) {
+        this.dni = dni;
+    }
+    public Cliente(String dni, String nombre, String apellidos, String direccion,
             String localidad, LocalDate fechaDeNacimiento) {
+        this.dni = dni;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.direccion = direccion;
@@ -25,55 +29,58 @@ public class Cliente {
     // GETTERS & SETTERS
     //////////////////////////////////////////////////////
 
+    public String getDni() {
+        return dni;
+    }
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
     public String getNombre() {
         return nombre;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
     public String getApellidos() {
         return apellidos;
     }
-
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
-
     public String getDireccion() {
         return direccion;
     }
-
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
     public String getLocalidad() {
         return localidad;
     }
-
     public void setLocalidad(String localidad) {
         this.localidad = localidad;
     }
-
     public LocalDate getFechaDeNacimiento() {
         return fechaDeNacimiento;
     }
-
     public void setFechaDeNacimiento(LocalDate fechaDeNacimiento) {
         this.fechaDeNacimiento = fechaDeNacimiento;
     }
+    
+ 
 
     //////////////////////////////////////////////////////
     // MÉTODOS
     //////////////////////////////////////////////////////
 
+    public String clienteCompleto(){
+        return dni + "-" +nombre + " " + apellidos;
+    }
     public String nombreCompleto() {
         return nombre + " " + apellidos;
     }
-
     public String direccionCompleta() {
         return direccion + ", " + localidad;
     }
+
+   
 }
