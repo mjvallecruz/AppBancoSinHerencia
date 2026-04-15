@@ -75,8 +75,8 @@ public class AppSucursalBancaria {
             cliente = validarCliente(dni);
 
         } while (cliente == null);
-
-        cuentas.add(new Cuenta(contadorCuenta++, 0, cliente));
+        Cuenta cuenta = validarCuenta(cliente);
+        //cuentas.add(new Cuenta(contadorCuenta++, 0, cliente));
         System.out.println("La cuenta a nombre de "+cliente.nombreCompleto()+" se ha creado correctamente");
     }
 
@@ -87,6 +87,24 @@ public class AppSucursalBancaria {
             }
         }
         return null;
+    }
+    static Cuenta validarCuenta(Cliente cliente){
+        int opcion;
+        while(true){
+             menuTipoCuenta();
+             opcion = Integer.parseInt(entrada.nextLine());
+             switch (opcion) {
+                case 1:
+                    return new CuentaCorriente(contadorCuenta++, cliente);
+                case 2:
+                    return new CuentaVivienda(contadorCuenta++, cliente);
+                case 3:
+                    return new FondoInversion(contadorCuenta++, cliente);
+             }
+
+           
+        }
+       
     }
 
     static void seleccionarCuenta() {
@@ -181,6 +199,18 @@ public class AppSucursalBancaria {
                 2 - Retirar
                 3 - Ver datos cuenta
                 4 - Volver al menú principal
+
+                """;
+        System.out.println(s);
+    }
+    static void menuTipoCuenta() {
+
+        String s = """
+
+                ELIJA EL TIPO CUENTA QUE QUIERE CREAR
+                1 - Cuenta Corriente
+                2 - Cuenta Vivienda
+                3 - Fondo Inversión
 
                 """;
         System.out.println(s);

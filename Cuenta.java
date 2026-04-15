@@ -3,11 +3,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 
-public class Cuenta {
+public abstract class Cuenta {
 
-    private int numeroCuenta;
-    private double saldo;
-    private Cliente titular;
+    protected int numeroCuenta;
+    protected double saldo;
+    protected Cliente titular;
     private ArrayList<Movimiento> movimientos;
 
     //////////////////////////////////////////////////////
@@ -49,7 +49,10 @@ public class Cuenta {
     public void setTitular(Cliente titular) {
         this.titular = titular;
     }
-
+     //////////////////////////////////////////////////////
+    // MÉTODOS ABSTRACTOS
+    //////////////////////////////////////////////////////
+    public abstract void verDatos();
     //////////////////////////////////////////////////////
     // MÉTODOS
     //////////////////////////////////////////////////////
@@ -88,7 +91,7 @@ public class Cuenta {
         System.out.println("Se han retirado correctamente "+cantidad+"€ de la cuenta "+numeroCuenta);
     }
 
-    private String obtenerMovimientos() {
+    protected String obtenerMovimientos() {
         String s = "";
         for (Movimiento m : movimientos) {
             s += m.toString() + "\n";
@@ -96,16 +99,7 @@ public class Cuenta {
         return s;
     }
 
-    public void verDatos() {
-
-        String s = "";
-        s += "Nºcuenta: " + numeroCuenta + "\n";
-        s += "Titular: " + "\n\t\t Dni:" +titular.getDni() + "\n\t\t Nombre:"+ titular.nombreCompleto() + "\n\t\t Domicilio:" + titular.direccionCompleta() + "\n";
-        s += "Saldo actual: " + saldo + "€\n";
-        s += "------------------------  M O V I M I E N T O S  ------------------------\n";
-        s += obtenerMovimientos();
-        System.out.println(s);
-    }
+    
 
     @Override
     public String toString() {
