@@ -63,31 +63,33 @@ public class AppSucursalBancaria {
             System.out.println("No hay clientes en la sucursal, primero debes crear uno");
             return;
         }
+        //obtener el cliente
+        Cliente cliente = validarCliente();
+        //obtener cuenta
+        Cuenta cuenta = validarCuenta(cliente);
+        //añadimos la cuenta al array de cuentas
+        cuentas.add(cuenta);
+        System.out.println("La cuenta a nombre de "+cliente.nombreCompleto()+" se ha creado correctamente");
+    }
 
+    static Cliente validarCliente() {
         String dni;
-        Cliente cliente;
-        do {
+        while(true){
             System.out.println("Dime el dni del cliente que quiere abrir una cuenta");
+            //mostrar la lista de los clientes
             for (Cliente c : clientes) {
                 System.out.println(c.clienteCompleto());
             }
             dni = entrada.nextLine();
-            cliente = validarCliente(dni);
-
-        } while (cliente == null);
-        Cuenta cuenta = validarCuenta(cliente);
-        //cuentas.add(new Cuenta(contadorCuenta++, 0, cliente));
-        System.out.println("La cuenta a nombre de "+cliente.nombreCompleto()+" se ha creado correctamente");
-    }
-
-    static Cliente validarCliente(String dni) {
-        for (Cliente c : clientes) {
-            if (c.getDni().equals(dni)) {
-                return c;
+            for (Cliente c : clientes) {
+                if (c.getDni().equals(dni)) {
+                    return c;
+                }
             }
         }
-        return null;
-    }
+    }        
+
+        
     static Cuenta validarCuenta(Cliente cliente){
         int opcion;
         while(true){
@@ -101,10 +103,7 @@ public class AppSucursalBancaria {
                 case 3:
                     return new FondoInversion(contadorCuenta++, cliente);
              }
-
-           
         }
-       
     }
 
     static void seleccionarCuenta() {
