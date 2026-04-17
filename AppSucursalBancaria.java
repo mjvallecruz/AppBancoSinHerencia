@@ -51,9 +51,9 @@ public class AppSucursalBancaria {
         System.out.println("Dime la ciudad de residencia del cliente");
         String ciudad = entrada.nextLine();
         System.out.println("Dime la fecha de nacimiento del cliente AAAA-MM-DD");
-        String fecha = entrada.nextLine();
+        LocalDate fecha = validarFechaDeNacimiento();
 
-        clientes.add(new Cliente(dni,nombre, apellidos, direccion, ciudad, LocalDate.parse(fecha)));
+        clientes.add(new Cliente(dni,nombre, apellidos, direccion, ciudad, fecha));
         System.out.println("El cliente de nombre "+nombre+" "+apellidos+" se ha creado correctamente");
     }
 
@@ -84,6 +84,16 @@ public class AppSucursalBancaria {
              return s;
             }catch(ClienteExisteException e){
                 System.out.println(e);
+            }
+       
+        }
+    }
+      static LocalDate validarFechaDeNacimiento()  {
+        while(true){
+            try{
+                return LocalDate.parse(entrada.nextLine());
+            }catch(Exception e){
+                System.out.println("Fecha errónea debe meter una fecha válida YYYY-MM-DD");
             }
        
         }

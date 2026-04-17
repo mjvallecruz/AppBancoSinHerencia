@@ -16,5 +16,12 @@ public class CuentaCorriente extends Cuenta {
         s += obtenerMovimientos();
         System.out.println(s);
     }
+
+    @Override
+    public void retiro(double cantidad) throws RetiroNoValidoException {
+        if(cantidad >300) throw RetiroNoValidoException("no se puede retirar más de 300 €");
+        if(cantidad >saldo) throw RetiroNoValidoException("saldo insuficiente");
+        if(cantidad<0) throw RetiroNoValidoException("retiro negativo");
+    }
     
 }

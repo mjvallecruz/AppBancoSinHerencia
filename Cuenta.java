@@ -53,6 +53,7 @@ public abstract class Cuenta {
     // MÉTODOS ABSTRACTOS
     //////////////////////////////////////////////////////
     public abstract void verDatos();
+    public abstract void retiro(double cantidad) throws RetiroNoValidoException;
     //////////////////////////////////////////////////////
     // MÉTODOS
     //////////////////////////////////////////////////////
@@ -71,21 +72,9 @@ public abstract class Cuenta {
         System.out.println("Se han ingresado correctamente "+cantidad+"€ en la cuenta "+numeroCuenta);
     }
 
-    public void retiro(double cantidad) {
-
-        // el retiro debe ser positivo
-        if (cantidad < 0) {
-            System.out.println("ERROR: No se puede retirar una cantidad negativa");
-            return;
-        }
-
-        // si no hay suficiente saldo
-        if (cantidad > saldo) {
-            System.out.println("ERROR: No hay suficiente saldo");
-            return;
-        }
-
-        // se retira y se registra
+   
+    protected void corfirmarRetiro(Double cantidad){
+         // se retira y se registra
         saldo -= cantidad;
         movimientos.add(new Movimiento(LocalDateTime.now(), cantidad, Movimiento.RETIRO));
         System.out.println("Se han retirado correctamente "+cantidad+"€ de la cuenta "+numeroCuenta);
