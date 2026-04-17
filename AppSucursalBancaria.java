@@ -40,7 +40,8 @@ public class AppSucursalBancaria {
     static void crearCliente() {
 
         System.out.println("Dime el dni del cliente");
-        String dni = entrada.nextLine();
+        //comprobar que el cliente no existe
+        String dni = validarDni();
         System.out.println("Dime el nombre del cliente");
         String nombre = entrada.nextLine();
         System.out.println("Dime los apellidos del cliente");
@@ -71,7 +72,22 @@ public class AppSucursalBancaria {
         cuentas.add(cuenta);
         System.out.println("La cuenta a nombre de "+cliente.nombreCompleto()+" se ha creado correctamente");
     }
-
+    //ejemplo de lanzar excepcion y capturarla dentro del mismo método
+    static String validarDni()  {
+        while(true){
+            try{
+                String s = entrada.nextLine();
+                //recorremos el arry de clientes
+                for(Cliente c: clientes){
+                if(c.getDni().equals(s)) throw new ClienteExisteException(c);
+                }
+             return s;
+            }catch(ClienteExisteException e){
+                System.out.println(e);
+            }
+       
+        }
+    }
     static Cliente validarCliente() {
         String dni;
         while(true){
