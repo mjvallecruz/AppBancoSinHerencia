@@ -20,5 +20,20 @@ public class FondoInversion extends Cuenta {
         s += obtenerMovimientos();
         System.out.println(s);
     }
+     @Override
+     public void retiro(double cantidad) throws RetiroNoValidoException {
+      if(cantidad<500) throw new RetiroNoValidoException("retiro mínimo 500 €");
+      if(saldo-cantidad < 3000) throw new RetiroNoValidoException("saldo insuficiente, debe haber siempre una saldo 3000 en el FI, saldo actual:"+ saldo);
+      if(cantidad<0) throw new RetiroNoValidoException("la cantidad a retirar no puede ser negativa"); 
+      this.corfirmarRetiro(cantidad);
+      this.calcularIntereses();
+    }
+     @Override
+     public void ingreso(double cantidad) throws IngresoNoValidoException {
+        if (cantidad <0) throw new IngresoNoValidoException("el ingreso no puede ser negativo");
+        if (cantidad <500) throw new IngresoNoValidoException("se debe ingresar mínimo 500€");
+        this.corfirmarIngreso(cantidad);
+        this.calcularIntereses();
+    }
     
 }

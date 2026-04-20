@@ -19,9 +19,17 @@ public class CuentaCorriente extends Cuenta {
 
     @Override
     public void retiro(double cantidad) throws RetiroNoValidoException {
-        if(cantidad >300) throw RetiroNoValidoException("no se puede retirar más de 300 €");
-        if(cantidad >saldo) throw RetiroNoValidoException("saldo insuficiente");
-        if(cantidad<0) throw RetiroNoValidoException("retiro negativo");
+        if(cantidad >300) throw new RetiroNoValidoException("no se puede retirar más de 300 €");
+        if(cantidad >saldo) throw new RetiroNoValidoException("saldo insuficiente");
+        if(cantidad<0) throw new RetiroNoValidoException("retiro negativo");
+        this.corfirmarRetiro(cantidad);
+    }
+
+    @Override
+    public void ingreso(double cantidad) throws IngresoNoValidoException {
+        if (cantidad <0) throw new IngresoNoValidoException("el ingreso no puede ser negativo");
+        if (cantidad <10) throw new IngresoNoValidoException("se debe ingresar mínimo 10€");
+        this.corfirmarIngreso(cantidad);
     }
     
 }

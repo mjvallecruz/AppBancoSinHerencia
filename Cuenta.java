@@ -54,25 +54,18 @@ public abstract class Cuenta {
     //////////////////////////////////////////////////////
     public abstract void verDatos();
     public abstract void retiro(double cantidad) throws RetiroNoValidoException;
+    public abstract void ingreso(double cantidad) throws IngresoNoValidoException;
     //////////////////////////////////////////////////////
     // MÉTODOS
-    //////////////////////////////////////////////////////
-
-    public void ingreso(double cantidad) {
-
-        // el ingreso debe ser positivo
-        if (cantidad < 0) {
-            System.out.println("ERROR: No se puede ingresar una cantidad negativa");
-            return;
-        }
-
+    /////////////////////////////////////////////////////
+       
+  protected void corfirmarIngreso(Double cantidad){
         // se ingresa y se registra
         saldo += cantidad;
         movimientos.add(new Movimiento(LocalDateTime.now(), cantidad, Movimiento.INGRESO));
         System.out.println("Se han ingresado correctamente "+cantidad+"€ en la cuenta "+numeroCuenta);
     }
-
-   
+  
     protected void corfirmarRetiro(Double cantidad){
          // se retira y se registra
         saldo -= cantidad;
@@ -87,8 +80,6 @@ public abstract class Cuenta {
         }
         return s;
     }
-
-    
 
     @Override
     public String toString() {

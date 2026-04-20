@@ -4,7 +4,7 @@ public class RetiroNoValidoException  extends Exception{
         super(message);
     }
     public String toString(){
-        return "ERROR: No se ha podido hacer el retiro, "+ getMessage()
+        return "ERROR: No se ha podido hacer el retiro, "+ getMessage();
     }
     
 
